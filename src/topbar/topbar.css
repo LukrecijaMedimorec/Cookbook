@@ -1,0 +1,51 @@
+.topbar {
+    width: 100%;
+    height: 70px;
+    background-color: white;
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    font-family: "Raleway", sans-serif;
+    font-weight: 400;
+    color: #A02334;
+    z-index: 1;
+
+    -webkit-box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.29);
+    -moz-box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.29);
+    box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.29);
+}
+
+.topLeft, .topRight {
+    flex: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.topCenter {
+    flex: 6;
+}
+
+.topLogoIcon {
+    font-size: 36px;
+}
+
+.topProfileIcon {
+    font-size: 30px;
+}
+
+.topList {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    background: transparent;
+}
+
+.itemText:hover {
+    text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.4);
+}
+
+.topListItem:hover {
+    cursor: pointer;
+}

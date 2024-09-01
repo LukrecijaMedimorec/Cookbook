@@ -1,0 +1,35 @@
+.header {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    background-image: url("/home/lukrecija/Projects/recipe_book_app/src/assets/pattern.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+
+.headerTitles {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: "Raleway", sans-serif;
+    margin-left: 30px;
+    font-weight: 500;
+    color: black;
+}
+
+.headerTitleSmall {
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+.headerTitleLarge {
+    font-size: 150px;
+
+}
+
+.headerImg {
+    width: 100vw;
+}

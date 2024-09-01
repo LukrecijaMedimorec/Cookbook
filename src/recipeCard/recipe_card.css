@@ -1,0 +1,63 @@
+.card {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #ddd; /* Light border around the card */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Padding inside the card */
+    background-color: #fff; /* White background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    width: 50vw;
+    max-width: 1000px; /* Max width for the card */
+    margin: 20px; /* Margin around the card */
+}
+
+.card-title {
+    font-family: "Raleway", sans-serif;
+    font-weight: bold;
+    font-size: 2.5em; /* Larger font size for the title */
+    margin-bottom: 8px; /* Space below the title */
+}
+
+.card-author {
+    font-family: "Inconsolata", system-ui;
+    font-size: 1.5em; /* Font size for the author */
+    color: #555; /* Darker gray color for the author */
+    margin-bottom: 12px; /* Space below the author */
+}
+
+.card-description {
+    font-family: "Raleway", sans-serif;
+    font-size: 1.5em;
+    color: #555;
+    margin-bottom: 12px;
+}
+
+.card-tags {
+    font-family: "Raleway", sans-serif;
+    font-size: 1em;
+    list-style-type: none; /* Remove default list styling */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+    display: flex; /* Display tags in a row */
+    flex-wrap: wrap; /* Allow tags to wrap to the next line */
+}
+
+.card-tag {
+    background-color: #f1f1f1; /* Light gray background for tags */
+    border-radius: 4px; /* Rounded corners for tags */
+    padding: 4px 8px; /* Padding inside the tag */
+    margin: 2px; /* Space between tags */
+    font-size: 0.875em; /* Smaller font size for tags */
+}
+
+.cardImage {
+    width: 30%;
+}
+
+.cardImage img {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    object-fit: contain;
+}
+
