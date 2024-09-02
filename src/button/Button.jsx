@@ -2,7 +2,7 @@ import './button.css'
 import React from 'react';
 
 // Define the Button component
-const Button = ({ color, textColor, font, fontSize, children }) => {
+const Button = ({ color, textColor, font, fontSize, onClick, children }) => {
     const buttonStyle = {
         backgroundColor: color,
         color: textColor,
@@ -12,7 +12,7 @@ const Button = ({ color, textColor, font, fontSize, children }) => {
     };
 
     return (
-        <button className="button" style={buttonStyle}>
+        <button className="button" style={buttonStyle} onClick={onClick}>
             {children}
         </button>
     );

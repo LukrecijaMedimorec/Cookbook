@@ -45,9 +45,8 @@ export default function AboutViewer() {
 
                     Thank you for visiting [Your Recipe Book Name]. Here’s to delicious food and wonderful memories made
                     around the table!
-                </p>
-
-                <p>
+                    <br/>
+                    <br/>
                     Happy cooking!
                     <br/>
                     Lukrecija

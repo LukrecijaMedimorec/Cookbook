@@ -33,3 +33,13 @@
 .headerImg {
     width: 100vw;
 }
+
+@media (max-width: 768px) {
+    .headerTitleSmall {
+        font-size: 30px;
+    }
+
+    .headerTitleLarge {
+        font-size: 100px;
+    }
+}

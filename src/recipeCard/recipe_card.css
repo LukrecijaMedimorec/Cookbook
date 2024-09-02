@@ -61,3 +61,16 @@
     object-fit: contain;
 }
 
+@media (max-width: 768px){
+
+    .card{
+        width: 60vw;
+        flex-direction: column;
+    }
+    .cardImage{
+        order: -1;
+        width:95%;
+        align-self: center;
+        margin-bottom: 5px;
+    }
+}

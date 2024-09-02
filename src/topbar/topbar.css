@@ -25,6 +25,7 @@
 
 .topCenter {
     flex: 6;
+    padding-left: 0;
 }
 
 .topLogoIcon {
@@ -35,10 +36,13 @@
     font-size: 30px;
 }
 
+.topProfileIcon:hover {
+    cursor: pointer;
+}
+
 .topList {
     display: flex;
     justify-content: space-around;
-    list-style: none;
     background: transparent;
 }
 
@@ -48,4 +52,59 @@
 
 .topListItem:hover {
     cursor: pointer;
+}
+
+
+
+
+/* Media Queries for Smaller Screens */
+@media (max-width: 768px) {
+    .topbar {
+        height: auto; /* Adjust height for stacked layout */
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 5px;
+    }
+
+    .topLeft, .topRight {
+        flex: 1;
+    }
+
+    .topCenter {
+        flex: 3;
+        flex-direction: column;
+        margin-top: 10px;
+    }
+
+    .topList {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 5px;
+    }
+
+    .topListItem {
+        margin-bottom: 5px;
+    }
+
+    .topLogoIcon, .topProfileIcon {
+        font-size: 24px; /* Adjust icon sizes for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .topLogoIcon {
+        font-size: 20px; /* Further adjust icon size for very small screens */
+    }
+
+    .topProfileIcon {
+        font-size: 20px;
+    }
+
+    .topListItem {
+        margin-bottom: 5px;
+    }
+
+    .itemText {
+        font-size: 14px; /* Adjust text size for very small screens */
+    }
 }

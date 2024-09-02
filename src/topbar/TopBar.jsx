@@ -1,15 +1,22 @@
 import './topbar.css'
 import {useNavigate} from 'react-router-dom';
 
-export default function TopBar() {
+const  TopBar = () => {
 
     const navigate = useNavigate();
-
-    const handleClick = (event, path) => {
-        event.preventDefault();
-        navigate(path);
+    const handleHomeRedirect = () => {
+        navigate('/');
     };
-    //TODO popravi shadow na tekstu
+    const handleRecipesRedirect = () => {
+        navigate('/recipes');
+    };
+
+    const handleAboutRedirect = () => {
+        navigate('/about');
+    };
+    const handleLoginRedirect = () => {
+        navigate('/login');
+    };
 
     return (
         <nav>
@@ -18,16 +25,18 @@ export default function TopBar() {
                     <i className="topLogoIcon fa-solid fa-kitchen-set"></i>
                 </div>
                 <div className="topCenter">
-                    <ul className="topList">
-                        <li className="topListItem"><p className="itemText">HOME</p></li>
-                        <li className="topListItem"><p className="itemText">MY RECIPES</p></li>
-                        <li className="topListItem"><p className="itemText">ABOUT</p></li>
-                    </ul>
+                    <div className="topList">
+                        <div className="topListItem" onClick={handleHomeRedirect}><p className="itemText">HOME</p></div>
+                        <div className="topListItem" onClick={handleRecipesRedirect}><p className="itemText">MY RECIPES</p></div>
+                        <div className="topListItem" onClick={handleAboutRedirect}><p className="itemText">ABOUT</p></div>
+                    </div>
                 </div>
                 <div className="topRight">
-                    <i className="topProfileIcon fa-solid fa-user"></i>
+                    <i className="topProfileIcon fa-solid fa-user" onClick={handleLoginRedirect}></i>
                 </div>
             </div>
 
         </nav>)
-}
+};
+
+export default TopBar;
