@@ -1,6 +1,6 @@
 import './topbar.css';
 import { useNavigate } from 'react-router-dom';
-import { isAuthenticated, removeToken } from '../utils/auth'; // Adjust the import path as necessary
+import { isAuthenticated, removeToken } from '../utils/auth';
 
 const TopBar = () => {
     const navigate = useNavigate();
@@ -22,8 +22,8 @@ const TopBar = () => {
     };
 
     const handleLogout = () => {
-        removeToken(); // Clear the authentication token or perform any other logout actions
-        navigate('/login'); // Redirect to the login page after logout
+        removeToken();
+        navigate('/login');
     };
 
     return (

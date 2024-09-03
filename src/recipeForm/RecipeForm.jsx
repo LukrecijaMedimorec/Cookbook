@@ -20,20 +20,18 @@ const RecipeForm = () => {
                     title,
                     content,
                     author,
-                    tags: tags.split(',').map(tag => tag.trim()), // Convert comma-separated tags to an array
+                    tags: tags.split(',').map(tag => tag.trim()),
                 });
 
                 console.log('Recipe submitted successfully:', response.data);
-                // Clear the form or redirect as needed
-                // Example: Clear the form
+
                 setTitle('');
                 setTags('');
                 setContent('');
                 setAuthor('');
             } catch (error) {
                 console.error('Error submitting recipe:', error.response ? error.response.data : error.message);
-                // Handle error response
-                // Example: Display an error message
+
             } finally {
                 setIsSubmitting(false);
             }
@@ -84,7 +82,7 @@ const RecipeForm = () => {
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
                         className={errors.content ? 'error' : ''}
-                        rows="6" // Adjust the number of rows as needed
+                        rows="6"
                     />
                     {errors.content && <span className="error-message">{errors.content}</span>}
                 </div>

@@ -1,8 +1,7 @@
-// src/pages/login/LoginForm.js
 import React, { useState } from 'react';
 import './login_form.css';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../services/authService'; // Import the login function
+import { login } from '../services/authService';
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
@@ -22,8 +21,8 @@ const LoginForm = () => {
         const formErrors = validateForm();
         if (Object.keys(formErrors).length === 0) {
             try {
-                await login(email, password); // Call the login function
-                navigate('/recipes'); // Redirect to a protected route after successful login
+                await login(email, password);
+                navigate('/recipes');
             } catch (error) {
                 console.error('Login error:', error);
                 setErrors({ apiError: error.message || 'Login failed' });
@@ -34,7 +33,7 @@ const LoginForm = () => {
     };
 
     const handleRegisterRedirect = () => {
-        navigate('/register'); // Redirect to the registration page
+        navigate('/register');
     };
 
     return (

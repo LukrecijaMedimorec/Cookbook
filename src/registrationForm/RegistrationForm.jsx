@@ -40,7 +40,7 @@ const RegistrationForm = () => {
     };
 
     const handleLoginRedirect = () => {
-        navigate('/login'); // Redirect to the login page
+        navigate('/login');
     };
 
     return (

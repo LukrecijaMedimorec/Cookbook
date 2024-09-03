@@ -42,7 +42,6 @@ const RecipeViewer = () => {
     const handleSearch = async (query) => {
         setSearchQuery(query);
         if (query.trim() === '') {
-            // Fetch all recipes if search query is empty
             const response = await axios.get('/1/recipes/getAll');
             setRecipes(response.data);
         } else {

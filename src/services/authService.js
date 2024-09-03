@@ -23,7 +23,7 @@ export const register = async (firstname, lastname, email, password, role) => {
         });
         const { access_token} = response.data;
 
-        setToken(access_token); // Adjust this based on how you handle tokens
+        setToken(access_token);
         return response.data;
     } catch (error) {
         throw new Error(error.response?.data?.message || 'Registration failed');
