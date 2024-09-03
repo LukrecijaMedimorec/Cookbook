@@ -4,7 +4,7 @@
     overflow: hidden;
     display: flex;
     align-items: center;
-    background-image: url("/home/lukrecija/Projects/recipe_book_app/src/assets/pattern.jpg");
+    background-image: url("../assets/pattern.jpg");
     background-size: cover;
     background-repeat: no-repeat;
 

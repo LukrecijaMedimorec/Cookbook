@@ -5,6 +5,7 @@ import About from "./pages/about/About";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import RecipeUpload from "./pages/recipeUpload/RecipeUpload";
+import PrivateRoute from "./privateRoute/PrivateRoute";
 
 function App() {
     return (
@@ -15,7 +16,10 @@ function App() {
                 <Route path="/about" element={<About/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/register" element={<Register/>}/>
-                <Route path="/upload" element={<RecipeUpload/>}/>
+                <Route
+                    path="/upload"
+                    element={<PrivateRoute element={<RecipeUpload />} />}
+                />
             </Routes>
         </>
     );
