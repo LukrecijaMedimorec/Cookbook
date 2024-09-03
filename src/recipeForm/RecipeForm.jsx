@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import './recipe_form.css'; // Optional: For styling
+import axios from '../api/axios';
+import './recipe_form.css';
 
 const RecipeForm = () => {
     const [title, setTitle] = useState('');

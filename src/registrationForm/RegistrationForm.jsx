@@ -9,7 +9,6 @@ const RegistrationForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [role, setRole] = useState('ADMIN');
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
 
@@ -28,8 +27,9 @@ const RegistrationForm = () => {
         const formErrors = validateForm();
         if (Object.keys(formErrors).length === 0) {
             try {
-                await register(firstname, lastname, email, password, role); // Use the register function
-                navigate('/upload'); // Redirect to a protected route after successful registration
+                const role = 'USER';
+                await register(firstname, lastname, email, password, role);
+                navigate('/upload');
             } catch (error) {
                 console.error('Registration error:', error);
                 setErrors({ apiError: error.message || 'Registration failed' });
@@ -101,18 +101,6 @@ const RegistrationForm = () => {
                         className={errors.confirmPassword ? 'error' : ''}
                     />
                     {errors.confirmPassword && <span className="error-message">{errors.confirmPassword}</span>}
-                </div>
-                <div className="form-group">
-                    <label htmlFor="role">Role:</label>
-                    <select
-                        id="role"
-                        value={role}
-                        onChange={(e) => setRole(e.target.value)}
-                    >
-                        <option value="USER">User</option>
-                        <option value="ADMIN">Admin</option>
-                        {/* Add other roles as needed */}
-                    </select>
                 </div>
                 <button type="submit">Register</button>
                 {errors.apiError && <span className="error-message">{errors.apiError}</span>}

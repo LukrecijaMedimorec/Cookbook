@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, {useState, useEffect} from 'react';
+import axios from '../api/axios';
 import './recipe_viewer.css';
 import RecipeCard from "../recipeCard/RecipeCard";
 import defaultImage from "../assets/doughnuts.jpg";
 import SearchBar from "../searchBar/SearchBar";
 import Button from "../button/Button";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+import {isAuthenticated, isAuthenticatedAsAdmin} from '../utils/auth';
 
 const RecipeViewer = () => {
     const [recipes, setRecipes] = useState([]);
@@ -13,10 +14,9 @@ const RecipeViewer = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Fetch recipes when component mounts
         const fetchRecipes = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/1/recipes/getAll');
+                const response = await axios.get('/1/recipes/getAll');
                 setRecipes(response.data);
             } catch (error) {
                 console.error('Error fetching recipes:', error);
@@ -32,7 +32,7 @@ const RecipeViewer = () => {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`http://localhost:8080/1/recipes/${id}`);
+            await axios.delete(`/1/recipes/${id}`);
             setRecipes(recipes.filter(recipe => recipe.id !== id));
         } catch (error) {
             console.error('Error deleting recipe:', error);
@@ -43,11 +43,11 @@ const RecipeViewer = () => {
         setSearchQuery(query);
         if (query.trim() === '') {
             // Fetch all recipes if search query is empty
-            const response = await axios.get('http://localhost:8080/1/recipes/getAll');
+            const response = await axios.get('/1/recipes/getAll');
             setRecipes(response.data);
         } else {
             try {
-                const response = await axios.get(`http://localhost:8080/1/recipes/search`, { params: { query } });
+                const response = await axios.get(`/1/recipes/search`, {params: {query}});
                 setRecipes(response.data);
             } catch (error) {
                 console.error('Error searching recipes:', error);
@@ -57,23 +57,27 @@ const RecipeViewer = () => {
 
     return (
         <div className="viewer">
-            <SearchBar onSearch={handleSearch} />
-            <Button onClick={handleRecipeRedirect} textColor="black" color="white" fontSize="20px">New recipe</Button>
+            <SearchBar onSearch={handleSearch}/>
+            {isAuthenticatedAsAdmin() ?
+                <Button onClick={handleRecipeRedirect} textColor="black" color="white" fontSize="20px">New
+                    recipe</Button> : null}
             {recipes.map(recipe => (
                 <div key={recipe.id} className="recipe-card-container">
                     <RecipeCard
                         title={recipe.title}
                         author={recipe.author}
-                        description={recipe.content} // Map content to description
+                        description={recipe.content}
                         tags={recipe.tags}
                         image={defaultImage}
                     />
-                    <button
-                        className="delete-button"
-                        onClick={() => handleDelete(recipe.id)}
-                    >
-                        Delete
-                    </button>
+                    {isAuthenticatedAsAdmin() ?
+                        <button
+                            className="delete-button"
+                            onClick={() => handleDelete(recipe.id)}
+                        >
+                            Delete
+                        </button> : null
+                    }
                 </div>
             ))}
         </div>

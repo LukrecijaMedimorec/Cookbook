@@ -12,14 +12,19 @@ export const removeToken = () => {
     localStorage.removeItem('accessToken');
 };
 
-export const getUser = () => {
+export const getUserRole = () => {
     const token = getToken();
     if (token) {
-        return jwtDecode(token);
+        return jwtDecode(token).role;
     }
     return null;
 };
 
 export const isAuthenticated = () => {
     return !!getToken();
+};
+
+export const isAuthenticatedAsAdmin = () => {
+    console.log(getUserRole());
+    return !!getToken() && getUserRole() === "ADMIN";
 };
