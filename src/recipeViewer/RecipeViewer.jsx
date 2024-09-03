@@ -9,9 +9,11 @@ import { useNavigate } from "react-router-dom";
 
 const RecipeViewer = () => {
     const [recipes, setRecipes] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
+        // Fetch recipes when component mounts
         const fetchRecipes = async () => {
             try {
                 const response = await axios.get('http://localhost:8080/1/recipes/getAll');
@@ -37,9 +39,25 @@ const RecipeViewer = () => {
         }
     };
 
+    const handleSearch = async (query) => {
+        setSearchQuery(query);
+        if (query.trim() === '') {
+            // Fetch all recipes if search query is empty
+            const response = await axios.get('http://localhost:8080/1/recipes/getAll');
+            setRecipes(response.data);
+        } else {
+            try {
+                const response = await axios.get(`http://localhost:8080/1/recipes/search`, { params: { query } });
+                setRecipes(response.data);
+            } catch (error) {
+                console.error('Error searching recipes:', error);
+            }
+        }
+    };
+
     return (
         <div className="viewer">
-            <SearchBar />
+            <SearchBar onSearch={handleSearch} />
             <Button onClick={handleRecipeRedirect} textColor="black" color="white" fontSize="20px">New recipe</Button>
             {recipes.map(recipe => (
                 <div key={recipe.id} className="recipe-card-container">
