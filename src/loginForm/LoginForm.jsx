@@ -23,7 +23,7 @@ const LoginForm = () => {
         if (Object.keys(formErrors).length === 0) {
             try {
                 await login(email, password); // Call the login function
-                navigate('/upload'); // Redirect to a protected route after successful login
+                navigate('/recipes'); // Redirect to a protected route after successful login
             } catch (error) {
                 console.error('Login error:', error);
                 setErrors({ apiError: error.message || 'Login failed' });

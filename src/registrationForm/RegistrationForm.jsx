@@ -29,7 +29,7 @@ const RegistrationForm = () => {
             try {
                 const role = 'USER';
                 await register(firstname, lastname, email, password, role);
-                navigate('/upload');
+                navigate('/recipes');
             } catch (error) {
                 console.error('Registration error:', error);
                 setErrors({ apiError: error.message || 'Registration failed' });
