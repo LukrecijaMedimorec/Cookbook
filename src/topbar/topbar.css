@@ -108,3 +108,28 @@
         font-size: 14px; /* Adjust text size for very small screens */
     }
 }
+
+.topRight {
+    display: flex;
+    align-items: center;
+}
+
+.topProfileIcon {
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.logoutButton {
+    background-color: #f44336; /* Red background for logout button */
+    color: white; /* White text */
+    border: none; /* Remove border */
+    padding: 5px 10px; /* Padding around the text */
+    margin-right: 20px;
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 1em; /* Font size */
+}
+
+.logoutButton:hover {
+    background-color: #d32f2f; /* Darker red on hover */
+}

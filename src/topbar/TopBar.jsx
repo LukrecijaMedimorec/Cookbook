@@ -1,12 +1,14 @@
-import './topbar.css'
-import {useNavigate} from 'react-router-dom';
+import './topbar.css';
+import { useNavigate } from 'react-router-dom';
+import { isAuthenticated, removeToken } from '../utils/auth';
 
-const  TopBar = () => {
-
+const TopBar = () => {
     const navigate = useNavigate();
+
     const handleHomeRedirect = () => {
         navigate('/');
     };
+
     const handleRecipesRedirect = () => {
         navigate('/recipes');
     };
@@ -14,7 +16,13 @@ const  TopBar = () => {
     const handleAboutRedirect = () => {
         navigate('/about');
     };
+
     const handleLoginRedirect = () => {
+        navigate('/login');
+    };
+
+    const handleLogout = () => {
+        removeToken();
         navigate('/login');
     };
 
@@ -32,11 +40,14 @@ const  TopBar = () => {
                     </div>
                 </div>
                 <div className="topRight">
+                    {isAuthenticated() && (
+                        <button className="logoutButton" onClick={handleLogout}>Logout</button>
+                    )}
                     <i className="topProfileIcon fa-solid fa-user" onClick={handleLoginRedirect}></i>
                 </div>
             </div>
-
-        </nav>)
+        </nav>
+    );
 };
 
 export default TopBar;

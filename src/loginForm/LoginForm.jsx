@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './login_form.css';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import { login } from '../services/authService';
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
@@ -15,19 +16,24 @@ const LoginForm = () => {
         return errors;
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const formErrors = validateForm();
         if (Object.keys(formErrors).length === 0) {
-            // Handle successful form submission here
-            console.log('Form submitted with:', { email, password });
+            try {
+                await login(email, password);
+                navigate('/recipes');
+            } catch (error) {
+                console.error('Login error:', error);
+                setErrors({ apiError: error.message || 'Login failed' });
+            }
         } else {
             setErrors(formErrors);
         }
     };
 
-    const handleLoginRedirect = () => {
-        navigate('/register'); // Redirect to the login page
+    const handleRegisterRedirect = () => {
+        navigate('/register');
     };
 
     return (
@@ -57,7 +63,8 @@ const LoginForm = () => {
                     {errors.password && <span className="error-message">{errors.password}</span>}
                 </div>
                 <button type="submit">Login</button>
-                <button type="button" onClick={handleLoginRedirect} className="register-button">
+                {errors.apiError && <span className="error-message">{errors.apiError}</span>}
+                <button type="button" onClick={handleRegisterRedirect} className="register-button">
                     Go to Registration
                 </button>
             </form>

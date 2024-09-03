@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './search_bar.css'; // Import the CSS file for styling
+import './search_bar.css';
 
 const SearchBar = ({ onSearch }) => {
     const [query, setQuery] = useState('');
@@ -9,9 +9,9 @@ const SearchBar = ({ onSearch }) => {
     };
 
     const handleSubmit = (e) => {
-        e.preventDefault(); // Prevent the default form submission
+        e.preventDefault();
         if (onSearch) {
-            onSearch(query); // Call the parent function with the search query
+            onSearch(query);
         }
     };
 
