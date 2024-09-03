@@ -1,21 +1,42 @@
-// RecipeUploadForm.js
 import React, { useState } from 'react';
+import axios from 'axios';
 import './recipe_form.css'; // Optional: For styling
 
 const RecipeForm = () => {
     const [title, setTitle] = useState('');
     const [tags, setTags] = useState('');
-    const [directions, setDirections] = useState('');
+    const [content, setContent] = useState('');
     const [author, setAuthor] = useState('');
-    const [shortDescription, setShortDescription] = useState('');
     const [errors, setErrors] = useState({});
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const formErrors = validateForm();
         if (Object.keys(formErrors).length === 0) {
-            // Handle successful form submission here
-            console.log('Recipe submitted with:', { title, tags, directions, author, shortDescription });
+            try {
+                setIsSubmitting(true);
+                const response = await axios.post('http://localhost:8080/1/recipes', {
+                    title,
+                    content,
+                    author,
+                    tags: tags.split(',').map(tag => tag.trim()), // Convert comma-separated tags to an array
+                });
+
+                console.log('Recipe submitted successfully:', response.data);
+                // Clear the form or redirect as needed
+                // Example: Clear the form
+                setTitle('');
+                setTags('');
+                setContent('');
+                setAuthor('');
+            } catch (error) {
+                console.error('Error submitting recipe:', error.response ? error.response.data : error.message);
+                // Handle error response
+                // Example: Display an error message
+            } finally {
+                setIsSubmitting(false);
+            }
         } else {
             setErrors(formErrors);
         }
@@ -24,10 +45,9 @@ const RecipeForm = () => {
     const validateForm = () => {
         const errors = {};
         if (!title) errors.title = 'Title is required';
-        if (!tags) errors.tags = 'Tag is required';
-        if (!directions) errors.directions = 'Directions are required';
+        if (!tags) errors.tags = 'Tags are required';
+        if (!content) errors.content = 'Content (directions) are required';
         if (!author) errors.author = 'Author is required';
-        if (!shortDescription) errors.shortDescription = 'Short description is required';
         return errors;
     };
 
@@ -47,33 +67,26 @@ const RecipeForm = () => {
                     {errors.title && <span className="error-message">{errors.title}</span>}
                 </div>
                 <div className="form-group">
-                    <label htmlFor="tags">Tag:</label>
-                    <select
+                    <label htmlFor="tags">Tags (comma separated):</label>
+                    <input
+                        type="text"
                         id="tags"
                         value={tags}
                         onChange={(e) => setTags(e.target.value)}
                         className={errors.tags ? 'error' : ''}
-                    >
-                        <option value="">Select a tag</option>
-                        <option value="soup">Soup</option>
-                        <option value="dessert">Dessert</option>
-                        <option value="main-dish">Main Dish</option>
-                        <option value="salad">Salad</option>
-                        <option value="appetizer">Appetizer</option>
-                        {/* Add more options as needed */}
-                    </select>
+                    />
                     {errors.tags && <span className="error-message">{errors.tags}</span>}
                 </div>
                 <div className="form-group">
-                    <label htmlFor="directions">Directions:</label>
+                    <label htmlFor="content">Content:</label>
                     <textarea
-                        id="directions"
-                        value={directions}
-                        onChange={(e) => setDirections(e.target.value)}
-                        className={errors.directions ? 'error' : ''}
+                        id="content"
+                        value={content}
+                        onChange={(e) => setContent(e.target.value)}
+                        className={errors.content ? 'error' : ''}
                         rows="6" // Adjust the number of rows as needed
                     />
-                    {errors.directions && <span className="error-message">{errors.directions}</span>}
+                    {errors.content && <span className="error-message">{errors.content}</span>}
                 </div>
                 <div className="form-group">
                     <label htmlFor="author">Author:</label>
@@ -86,18 +99,9 @@ const RecipeForm = () => {
                     />
                     {errors.author && <span className="error-message">{errors.author}</span>}
                 </div>
-                <div className="form-group">
-                    <label htmlFor="shortDescription">Short Description:</label>
-                    <input
-                        type="text"
-                        id="shortDescription"
-                        value={shortDescription}
-                        onChange={(e) => setShortDescription(e.target.value)}
-                        className={errors.shortDescription ? 'error' : ''}
-                    />
-                    {errors.shortDescription && <span className="error-message">{errors.shortDescription}</span>}
-                </div>
-                <button type="submit">Submit Recipe</button>
+                <button type="submit" disabled={isSubmitting}>
+                    {isSubmitting ? 'Submitting...' : 'Submit Recipe'}
+                </button>
             </form>
         </div>
     );

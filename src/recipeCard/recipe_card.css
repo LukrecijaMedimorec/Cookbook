@@ -1,28 +1,40 @@
 .card {
     display: flex;
     justify-content: space-between;
-    border: 1px solid #ddd; /* Light border around the card */
-    border-radius: 8px; /* Rounded corners */
-    padding: 20px; /* Padding inside the card */
-    background-color: #fff; /* White background */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 50vw;
-    max-width: 1000px; /* Max width for the card */
-    margin: 20px; /* Margin around the card */
+    max-width: 1000px;
+    margin: 20px;
+    overflow: hidden;
+    box-sizing: border-box; /* Ensure padding and border are included in width */
+}
+
+.cardText {
+    flex: 1;
+    margin-right: 20px;
+    overflow: hidden; /* Hide any overflowing text */
 }
 
 .card-title {
     font-family: "Raleway", sans-serif;
     font-weight: bold;
-    font-size: 2.5em; /* Larger font size for the title */
-    margin-bottom: 8px; /* Space below the title */
+    font-size: 2.5em;
+    margin-bottom: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .card-author {
     font-family: "Inconsolata", system-ui;
-    font-size: 1.5em; /* Font size for the author */
-    color: #555; /* Darker gray color for the author */
-    margin-bottom: 12px; /* Space below the author */
+    font-size: 1.5em;
+    color: #555;
+    margin-bottom: 12px;
 }
 
 .card-description {
@@ -30,47 +42,65 @@
     font-size: 1.5em;
     color: #555;
     margin-bottom: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .card-tags {
     font-family: "Raleway", sans-serif;
     font-size: 1em;
-    list-style-type: none; /* Remove default list styling */
-    padding: 0; /* Remove padding */
-    margin: 0; /* Remove margin */
-    display: flex; /* Display tags in a row */
-    flex-wrap: wrap; /* Allow tags to wrap to the next line */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .card-tag {
-    background-color: #f1f1f1; /* Light gray background for tags */
-    border-radius: 4px; /* Rounded corners for tags */
-    padding: 4px 8px; /* Padding inside the tag */
-    margin: 2px; /* Space between tags */
-    font-size: 0.875em; /* Smaller font size for tags */
+    background-color: #f1f1f1;
+    border-radius: 4px;
+    padding: 4px 8px;
+    margin: 2px;
+    font-size: 0.875em;
 }
 
 .cardImage {
+    flex-shrink: 0; /* Prevent the image from shrinking */
     width: 30%;
+    max-width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 5px;
 }
 
 .cardImage img {
     width: 100%;
-    height: 100%;
+    height: auto;
+    object-fit: cover;
     border-radius: 5px;
-    object-fit: contain;
 }
 
-@media (max-width: 768px){
-
-    .card{
-        width: 60vw;
+@media (max-width: 768px) {
+    .card {
         flex-direction: column;
+        width: 60vw;
     }
-    .cardImage{
+    .cardImage {
         order: -1;
-        width:95%;
+        width: 95%;
         align-self: center;
         margin-bottom: 5px;
+    }
+    .card-description {
+        display: none; /* Hide the description on smaller screens */
+    }
+    .card-title {
+        font-size: 1.5em; /* Smaller font size for the title on smaller screens */
+        white-space: normal; /* Allow the title to wrap */
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
